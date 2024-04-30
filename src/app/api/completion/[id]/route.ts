@@ -11,7 +11,7 @@ export async function POST(
 
     console.log("Habit:: ", habitId);
 
-    const updatedHabit = await completeHabit(new ObjectId(habitId));
+    const updatedHabit = await completeHabit((habitId));
     console.log("updatedHabit:: ", updatedHabit);
     return Response.json({ message: "Habit marked as completed" });
   } catch (error) {

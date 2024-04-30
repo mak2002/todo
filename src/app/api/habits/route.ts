@@ -1,16 +1,16 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import {
   createHabit,
-  getHabits,
+  getHabitsdb,
   updateHabit,
   deleteHabit,
-  executeQuery,
+  // executeQuery,
 } from "../../services/habitsService";
 import { HabitModel } from "@/app/models/habit.model";
 
 export async function GET(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const habits = await getHabits();
+    const habits = await getHabitsdb();
     try {
       console.log("Habits:", habits);
 

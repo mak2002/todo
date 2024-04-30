@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import {
   createHabit,
-  getHabits,
+  getHabitsdb,
   updateHabit,
   deleteHabit,
-  executeQuery,
+  // executeQuery,
 } from "../../../services/habitsService";
 import { ObjectId } from "mongodb";
 
@@ -30,8 +30,8 @@ export async function PUT(req: Request, res: NextApiResponse) {
       return Response.json({ error: "Invalid habit ID" });
     }
 
-    const objectId = new ObjectId(habitId);
-    const updatedData = await updateHabit(objectId, body.newHabit);
+    // const objectId = new ObjectId(habitId);
+    const updatedData = await updateHabit(habitId, body.newHabit);
     console.log("updatedData:: ", updatedData);
 
     return Response.json(updatedData);
@@ -47,7 +47,7 @@ export async function DELETE(req: any, { params }: { params: { id: string } }) {
   console.log("idD: ", params.id);
   try {
     const objectId = new ObjectId(params.id);
-    const deletedHabit = await deleteHabit(objectId);
+    const deletedHabit = await deleteHabit(params.id);
     console.log("createdHabit:: ", deletedHabit);
     return Response.json({ msg: "deletedHabit" }); // 201 Created status code for successful creation
   } catch (error) {
