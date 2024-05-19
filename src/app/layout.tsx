@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className} data-theme="wireframe">
+      <body className={inter.className} data-theme="corporate">
         <Navbar />
         {children}
         <script

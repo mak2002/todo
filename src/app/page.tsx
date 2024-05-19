@@ -1,67 +1,61 @@
-"use client";
+'use client'
 import { useState } from "react";
 import Habits from "./components/List";
 import HabitCalendar from "./components/HabitCalendar";
-import { Habit } from "./db";
-import { getHabitsdb } from "./services/habitsService";
 import Add from "./components/Add";
+import { Habit } from "./db";
 
 export default function Home() {
-  const [selectedComponent, setSelectedComponent] = useState("Habits");
-  const [showAddForm, setShowAddForm] = useState<boolean>(false);
-
-  const [newHabit, setNewHabit] = useState<string>("");
-  const [inputStr, setInputStr] = useState("");
-  const [habits, setHabits] = useState<Habit[]>([]);
+  const [selectedComponent, setSelectedComponent] = useState("List");
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   const renderComponent = () => {
     if (showAddForm) return;
     switch (selectedComponent) {
-      case "Habits":
-        return <Habits />;
-      case "HabitCalendar":
+      case "List":
+        return <Habits selectedDate={selectedDate} selectedComponent={selectedComponent}/>;
+      case "Squares":
         return <HabitCalendar />;
       default:
         return null;
     }
   };
 
-  return (
-    <main className="h-screen bg-white">
-      <div className="flex justify-between w-full">
-        <p className="text-2xl p-4">Yo, Mayank👋 Good Evening!</p>
-        <div className="flex items-center px-2">
-          <label htmlFor="componentSelect pl-2 w-full">View</label>
-          <select
-            id="componentSelect"
-            value={selectedComponent}
-            onChange={(e) => setSelectedComponent(e.target.value)}
-            className="ml-2 p-2 border-2 border-black"
-          >
-            <option value="Habits">Habits</option>
-            <option value="HabitCalendar">Habit Calendar</option>
-          </select>
-        </div>
-      </div>
-      <div className="">
-        {/* <div className="pl-4 pt-5 pb-5 flex w-full gap-5">
-          {true && (
-            <div className="text-left w-full justify-center">
-              <button
-                onClick={() => setShowAddForm(true)}
-                className="p-2 bg-slate-200 font-extrabold"
-              >
-                Add Habit 🌱
-              </button>
-            </div>
-          )}
-        </div> */}
-        {renderComponent()}
+  const handleDateChange = (e: any) => {
+    const selectedDate = new Date(e.target.value);
+    setSelectedDate(selectedDate);
+  };
 
-        {showAddForm && (
-          <Add showAddForm={showAddForm} setShowAddForm={setShowAddForm} />
-        )}
+  const formattedDate = selectedDate.toLocaleDateString(undefined, {
+    day: "numeric",
+    month: "long",
+  });
+
+  return (
+    <main className="h-screen  flex flex-col">
+      <header className="px-4 py-2 flex justify-between mt-2 items-center">
+        <p className="text-2xl font-semibold">Welcome! 🌙</p>
+        <p className="text-2xl font-semibold"> {formattedDate}</p>
+
+        <div className="flex items-center space-x-4">
+          
+          <div className="flex items-center space-x-2 pt-2">
+            {/* <label htmlFor="datePicker">Select Date:</label> */}
+            <input
+              type="date"
+              id="datePicker"
+              value={selectedDate.toISOString().split("T")[0]}
+              onChange={handleDateChange}
+              className="border-2 rounded-3xl border-black p-2 focus:outline-none"
+            />
+          </div>
+        </div>
+      </header>
+      <div className="flex-grow bg-white flex justify-center pt-14">
+        {renderComponent()}
       </div>
+      
     </main>
   );
 }

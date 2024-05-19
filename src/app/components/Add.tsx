@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 import { Habit } from "../db";
 import EmojiPicker from "emoji-picker-react";
-import { createHabit, getHabitsdb } from "../services/habitsService";
+import { createHabitdb, getHabitsdb } from "../services/habitsService";
 import { v4 as uuidv4 } from "uuid";
 
-export default function Add({showAddForm, setShowAddForm}: any) {
-
-    const [habits, setHabits] = useState<Habit[]>([]);
+export default function Add({ showAddForm, setShowAddForm, notify }: any) {
+  const [habits, setHabits] = useState<Habit[]>([]);
   const [showPicker, setShowPicker] = useState(false);
   const [newHabit, setNewHabit] = useState<string>("");
   const [frequencyType, setFrequencyType] = useState<string>("daily");
   const [startDate, setStartDate] = useState<string>(""); // State for start date
-//   const [showAddForm, setShowAddForm] = useState<boolean>(true);
+  //   const [showAddForm, setShowAddForm] = useState<boolean>(true);
 
   const [inputStr, setInputStr] = useState("");
-
 
   const handleReaction = (event: any) => {
     setInputStr((prevInput) => event.emoji);
@@ -44,13 +42,14 @@ export default function Add({showAddForm, setShowAddForm}: any) {
 
   const addHabit = async () => {
     try {
-      const createdHabit = await createHabit({
+      const createdHabit = await createHabitdb({
         _id: uuidv4(),
         name: newHabit,
         frequency: frequencyType,
         startDate,
         completed: [],
         emoji: inputStr,
+        // challengeName: ""
       });
       const response = await getHabitsdb();
       console.log("createdHabit:: ", createdHabit);
@@ -58,16 +57,16 @@ export default function Add({showAddForm, setShowAddForm}: any) {
       setNewHabit("");
       setFrequencyType("daily");
       setStartDate(""); // Reset start date
+      notify();
       await fetchHabits();
     } catch (error) {
       console.error("Error adding habit:", error);
     }
   };
 
-
   return (
     <div>
-      {showAddForm && (
+      {true && (
         <div className="mt-4 justify-center items-center flex flex-col w-full">
           <div className="w-3/6">
             <input

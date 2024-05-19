@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import {
-  createHabit,
+  createHabitdb,
   getHabitsdb,
   updateHabit,
-  deleteHabit,
+  deleteHabitdb,
   // executeQuery,
 } from "../../services/habitsService";
 import { HabitModel } from "@/app/models/habit.model";
@@ -35,7 +35,7 @@ export async function POST(req: any, { params }: { params: { id: string } }) {
     console.log("body:: ", body);
     // Validate the newHabit data (optional)
 
-    const createdHabit = await createHabit(body);
+    const createdHabit = await createHabitdb(body);
     console.log("createdHabit:: ", createdHabit);
     return Response.json(createdHabit); // 201 Created status code for successful creation
   } catch (error) {

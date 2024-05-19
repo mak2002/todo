@@ -1,0 +1,49 @@
+.container {
+  max-width: 1200px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .text-2xl {
+    font-size: 1.5rem;
+  }
+
+  .text-3xl {
+    font-size: 2rem;
+  }
+
+  .p-6 {
+    padding: 1.5rem;
+  }
+
+  .p-8 {
+    padding: 2rem;
+  }
+
+  .w-96 {
+    width: 90%;
+  }
+}
+
+.checked {
+  background-color: #d4f1f4;
+}
+
+.clicked {
+  color: #004d40;
+}
+
+.inner-circle {
+  display: inline-block;
+}
+
+.filled-circle {
+  display: inline-block;
+}
+
+.bg-gray-900 {
+  background-color: rgba(0, 0, 0, 0.9);
+}

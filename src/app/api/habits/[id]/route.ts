@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import {
-  createHabit,
+  createHabitdb,
   getHabitsdb,
   updateHabit,
-  deleteHabit,
+  deleteHabitdb,
   // executeQuery,
 } from "../../../services/habitsService";
 import { ObjectId } from "mongodb";
@@ -47,7 +47,7 @@ export async function DELETE(req: any, { params }: { params: { id: string } }) {
   console.log("idD: ", params.id);
   try {
     const objectId = new ObjectId(params.id);
-    const deletedHabit = await deleteHabit(params.id);
+    const deletedHabit = await deleteHabitdb(params.id);
     console.log("createdHabit:: ", deletedHabit);
     return Response.json({ msg: "deletedHabit" }); // 201 Created status code for successful creation
   } catch (error) {
