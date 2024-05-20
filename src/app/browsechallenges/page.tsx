@@ -5,7 +5,7 @@ import { Habit } from "../db";
 import { challengesData } from "./challenges";
 import HabitForm from "../components/ChallengeForm";
 import "react-toastify/dist/ReactToastify.css";
-
+import { useRouter } from 'next/navigation'
 import { ToastContainer, toast } from "react-toastify";
 
 interface Challenge {
@@ -21,7 +21,9 @@ export default function Page() {
   );
   const [startDate, setStartDate] = useState<string>("");
   const [showForm, setShowForm] = useState(false);
+  const [isProgressLogged, setIsProgressLogged] = useState(false);
   const notify = () => toast("Challenge is on!");
+  const router = useRouter()
 
   const enrollInChallenge = (challenge: Challenge) => {
     if (!enrolledChallenges.some((c) => c.id === challenge.id)) {
@@ -46,9 +48,14 @@ export default function Page() {
         if (!habit.startDate) {
           habit.startDate = [];
         }
+
+        if(!habit.isProgressLogged){
+          habit.isProgressLogged = false
+        }
         // add start date to each habit
         habit.startDate = new Date().toISOString().split("T")[0];
         habit.challengeDays = challengeData.challengeDays;
+        habit.isProgressLogged = isProgressLogged;
         // Set the challengeId for each habit
         // Create the habit in the database
         await createHabitdb(habit);
@@ -68,6 +75,9 @@ export default function Page() {
       setStartDate("");
       await saveChallenge(selectedChallenge);
       notify();
+      // redirect to /today
+      router.push("/")
+
     }
   };
 
@@ -102,6 +112,11 @@ export default function Page() {
           <h2 className="text-2xl font-semibold mb-4 text-gray-700">
             {selectedChallenge.name}
           </h2>
+          <div className="flex gap-2 items-center">
+
+          <p className="text-lg">Include progress log</p>
+          <input type="checkbox" onChange={() => setIsProgressLogged(!isProgressLogged)} className="checkbox rounded-full border-1 border-black" checked={isProgressLogged}/>
+          </div>
           <div className="mb-4">
             <h3 className="text-2xl font-semibold text-gray-700">Habits</h3>
             <ul className="list-disc ml-6 text-xl">

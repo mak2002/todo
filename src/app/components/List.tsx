@@ -30,9 +30,18 @@ const Habits = ({
   const [inputValue, setInputValue] = useState<string | File>("");
 
   const handleHabitClick = async (habitId: string) => {
+    const abcd = habitId === checkedHabitId ? null : habitId
+    console.log('abcd:: ', habitId);
     setCheckedHabitId(habitId === checkedHabitId ? null : habitId);
     setAnimationComplete(false);
-    setShowModal(true);
+    const habit = allHabits.find((habit) => habit._id === habitId);
+    console.log("habit:: ", habit);
+    if (habit!.isProgressLogged) {
+      setShowModal(true);
+    }
+    else {
+      await completeHabit(habitId!, inputValue as string);
+    }
   };
 
   useEffect(() => {
@@ -146,7 +155,7 @@ const Habits = ({
           remainingHabits.length > 0 && (
             <div
               key={challengeId}
-              className="w-full  shadow-xl border border-black flex flex-col rounded-2xl mb-4 bg-white"
+              className="w-full shadow-xl border border-black flex flex-col rounded-2xl mb-4 bg-white"
             >
               <div className="rounded-lg p-6">
                 <h2 className="text-3xl font-semibold mb-4 text-gray-800">
@@ -159,22 +168,17 @@ const Habits = ({
                   {remainingHabits.map((habit) => (
                     <li
                       key={habit._id}
-                      className={`flex text-2xl items-center justify-between py-2 cursor-pointer transition-colors duration-500 ${
+                      className={`flex text-xl sm:text-2xl items-center justify-between py-2 cursor-pointer transition-colors duration-500 ${
                         checkedHabitId === habit._id ? "checked clicked" : ""
                       }`}
                       onClick={() => handleHabitClick(habit._id)}
                     >
                       <span className="flex items-center gap-2">
-                        {/* <input
-                          type={checkedHabitId === habit._id ? "checkbox" : ""}
-                          className="checkbox rounded-full"
-                        /> */}
                         <input
                           type="checkbox"
                           checked={false}
                           className="checkbox border-2 rounded-full border-black"
                         />
-                        {/* <span className=" bg-gray-300 w-5 h-5 rounded-full"></span> */}
                         {habit.name} {habit.emoji}
                       </span>
                     </li>
@@ -196,18 +200,17 @@ const Habits = ({
         return !remainingHabits || remainingHabits.length === 0;
       }) && (
         <div className="text-3xl w-full flex justify-center text-gray-700">
-        {allHabits.length > 0 ? (
-          `You have won today 😊`
-        ) : (
-          <div className="flex items-center gap-2">
-            <p>Embark on a challenge by going to</p>
-            <Link href="/browsechallenges" className="btn btn-outline">
-              Browse Challenge
-            </Link>
-          </div>
-        )}
-      </div>
-      
+          {allHabits.length > 0 ? (
+            `You have won today 😊`
+          ) : (
+            <div className="flex items-center gap-2">
+              <p>Embark on a challenge by going to</p>
+              <Link href="/browsechallenges">
+                <p className="btn btn-outline rounded-3xl">Browse Challenges</p>
+              </Link>
+            </div>
+          )}
+        </div>
       )}
 
       {Object.values(completedHabits).some(
@@ -226,7 +229,7 @@ const Habits = ({
                 completedHabits[challengeId]?.map((habit) => (
                   <li
                     key={habit._id}
-                    className="flex text-2xl items-center justify-between border-b border-gray-300 py-2 line-through"
+                    className="flex text-xl sm:text-2xl items-center justify-between border-b border-gray-300 py-2 line-through"
                   >
                     <span className="flex items-center gap-2">
                       <span className="filled-circle bg-gray-600 w-5 h-5 rounded-full"></span>
@@ -242,7 +245,7 @@ const Habits = ({
 
       {showModal && (
         <div className="fixed inset-0 z-10 flex items-center justify-center bg-gray-900 bg-opacity-50">
-          <div className="bg-white p-8 rounded-lg w-96 shadow-xl">
+          <div className="bg-white p-8 rounded-lg w-11/12 sm:w-96 shadow-xl">
             <h2 className="text-xl mb-4">Progress Log</h2>
             <select
               value={inputType}

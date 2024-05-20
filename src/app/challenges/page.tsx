@@ -257,17 +257,14 @@ const Challenges: React.FC = () => {
 
   const noChallengeHabits = habits.filter((habit) => !habit.challengeId);
   // console.log('completionPercentages>> ', completionPercentages);
-  const completedChallenges = challenges.filter(
-    (challenge) =>
-      challenge.habits[0].startDate ===
-        new Date().toISOString().split("T")[0] ||
-      challengeCompletion[challenge.challengeName] == 100
-  );
+  const completedChallenges = challenges.filter((challenge) => {
+    
+    challengeCompletion[challenge.challengeName] == 100;
+  });
 
-  console.log("completedChallenges>> ", habits);
-console.log('completedChallenges', completedChallenges);
+  // console.log("completedChallenges>> ", habits);
+  console.log("completedChallenges", completedChallenges);
   const areThereCompletedChallenges = completedChallenges.length > 0;
-
 
   return (
     <div className="container mx-auto px-4 py-8 bg-white min-h-screen">
@@ -293,12 +290,9 @@ console.log('completedChallenges', completedChallenges);
                 ⬅️ Back
               </button>
             )}
-            
           </div>
         )}
       </div>
-
-     
 
       {!showForm && !selectedChallenge && challenges.length > 0 && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -316,11 +310,22 @@ console.log('completedChallenges', completedChallenges);
                 </h2>
                 <div
                   className={`radial-progress bg-white text-black border-4 border-slate-300 mx-auto mb-4`}
-                // @ts-ignore
+                  // @ts-ignore
                   style={{ "--value": `${challengeCompletion[challengeName]}` }}
                   role="progressbar"
                 >
                   {challengeCompletion[challengeName]}%
+                </div>
+                <div className="flex gap-1">
+                  <p>Duration: </p>
+                  <p className="text-md font-bold">
+                    {" "}
+                    {challenge.habits[0].challengeDays} days
+                  </p>
+                </div>
+                <div>
+                  {/* <p>Remaining days</p> */}
+                  {/* <p className="text-md font-bold"> {" "} {new Date() - challenge.habits[0].startDate}</p> */}
                 </div>
                 <div className="mt-4">
                   <p className="font-semibold text-gray-600">Habits</p>
@@ -356,9 +361,15 @@ console.log('completedChallenges', completedChallenges);
 
       {!showForm && !selectedChallenge && challenges.length > 0 && (
         <div className="mt-4 mb-4">
-          {completedChallenges.length > 0 ? <p className="text-3xl mt-8 font-bold">Completed Challenges</p> : <p className="text-3xl py-8 font-bold">No Completed Challenges 🧐</p>}
+          {completedChallenges.length > 0 ? (
+            <p className="text-3xl mt-8 font-bold">Completed Challenges</p>
+          ) : (
+            <p className="text-3xl py-8 font-bold">
+              No Completed Challenges 🧐
+            </p>
+          )}
           <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            { challenges.map((challenge, index) => {
+            {challenges.map((challenge, index) => {
               const challengeName = challenge.challengeName;
               if (challengeCompletion[challengeName] == 100) {
                 return (
@@ -372,13 +383,14 @@ console.log('completedChallenges', completedChallenges);
                     <div
                       className="radial-progress bg-white text-primary-content border-4 border-slate-300 mx-auto mb-4"
                       style={{
-                // @ts-ignore
+                        // @ts-ignore
                         "--value": `${challengeCompletion[challengeName]}`,
                       }}
                       role="progressbar"
                     >
                       {challengeCompletion[challengeName]}%
                     </div>
+
                     <div className="mt-4">
                       <p className="font-semibold text-gray-600">Habits:</p>
                       <ul className="list-disc ml-6">

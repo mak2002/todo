@@ -16,6 +16,7 @@ export interface Habit {
   challengeDays?: number;
   tags?: string[];
   challengeId?: string;
+  isProgressLogged?: boolean;
 }
 
 class HabitDatabase extends Dexie {

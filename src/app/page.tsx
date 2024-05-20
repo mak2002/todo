@@ -35,7 +35,7 @@ export default function Home() {
   return (
     <main className="h-screen  flex flex-col">
       <header className="px-4 py-2 flex justify-between mt-2 items-center">
-        <p className="text-2xl font-semibold">Welcome! 🌙</p>
+        <p className="text-2xl font-semibold">Welcome 🌙</p>
         <p className="text-2xl font-semibold"> {formattedDate}</p>
 
         <div className="flex items-center space-x-4">

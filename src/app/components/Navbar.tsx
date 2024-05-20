@@ -36,7 +36,7 @@ const Navbar = () => {
           <p className="btn btn-outline text-lg border-2 rounded-3xl border-black text-gray-900">Today 📅</p>
         </Link>
         <Link href="/challenges">
-          <p className="btn btn-outline text-lg border-2  rounded-3xl border-black text-gray-900">Challenges 🎯</p>
+          <p className="btn btn-outline text-lg border-2  rounded-3xl border-black text-gray-900">My Challenges 🎯</p>
         </Link>
         {/* <Link href="/create" className="btn btn-outline  rounded-3xl border-2 border-black text-lg text-gray-900">
           Create 🎨

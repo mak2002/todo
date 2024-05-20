@@ -84,7 +84,7 @@ const ChallengeDetails: React.FC<ChallengeDetailsProps> = ({
                   return (
                     <li
                       key={formattedDate}
-                      className="border-2 border-black p-2"
+                      className=" p-2"
                     >
                       <div className="flex flex-col">
                         <p className="text-md text-gray-700 mb-1">
