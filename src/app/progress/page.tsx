@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import HeatMap from "@uiw/react-heat-map";
-import Tooltip from "@uiw/react-tooltip";
+// import Tooltip from "@uiw/react-tooltip";
 import "react-calendar-heatmap/dist/styles.css";
 import habitDB, { Habit } from "../db";
 import useHabits from "../hooks/useHooks";

@@ -7,6 +7,7 @@ import {
 } from "../services/habitsService";
 import { Habit } from "../db";
 import "./List.css"; // Ensure this file is properly defined with necessary styles
+import Link from "next/link";
 
 const Habits = ({
   selectedDate,
@@ -128,7 +129,7 @@ const Habits = ({
   const completedChallenges = Object.keys(completedHabits).filter(
     (key) => completedHabits[key].length > 0
   );
-  console.log("completedChallenges", completedChallenges);
+  console.log("completedChallenges", completedChallenges, allHabits);
 
   return (
     <div className="container mx-auto px-4 py-8 text-lg flex flex-col items-center justify-start min-h-screen">
@@ -168,8 +169,11 @@ const Habits = ({
                           type={checkedHabitId === habit._id ? "checkbox" : ""}
                           className="checkbox rounded-full"
                         /> */}
-                        <input type="checkbox" checked={false} className="checkbox border-2 rounded-full border-black" />
-
+                        <input
+                          type="checkbox"
+                          checked={false}
+                          className="checkbox border-2 rounded-full border-black"
+                        />
                         {/* <span className=" bg-gray-300 w-5 h-5 rounded-full"></span> */}
                         {habit.name} {habit.emoji}
                       </span>
@@ -191,9 +195,19 @@ const Habits = ({
         );
         return !remainingHabits || remainingHabits.length === 0;
       }) && (
-        <p className="text-3xl max-w-lg mx-auto text-gray-700">
-          You have won today 😊{" "}
-        </p>
+        <div className="text-3xl w-full flex justify-center text-gray-700">
+        {allHabits.length > 0 ? (
+          `You have won today 😊`
+        ) : (
+          <div className="flex items-center gap-2">
+            <p>Embark on a challenge by going to</p>
+            <Link href="/browsechallenges" className="btn btn-outline">
+              Browse Challenge
+            </Link>
+          </div>
+        )}
+      </div>
+      
       )}
 
       {Object.values(completedHabits).some(

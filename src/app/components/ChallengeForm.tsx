@@ -223,7 +223,7 @@ const HabitForm = ({ setShowForm }: any) => {
             placeholder="Number of days for challenge"
             className="input input-bordered w-full"
           />
-          <button type="submit" className="btn btn-outline mt-4 w-full">
+          <button type="submit" className="btn btn-success mt-4 w-full">
             Start Challenge
           </button>
         </form>

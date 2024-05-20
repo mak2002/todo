@@ -427,7 +427,7 @@ console.log('completedChallenges', completedChallenges);
 
       {!showForm && challenges.length === 0 && habits.length === 0 && (
         <div className="text-center mt-6">
-          <p className="text-gray-500">No challenges available.</p>
+          <p className="text-gray-500 text-xl">No challenges available 😴</p>
         </div>
       )}
     </div>

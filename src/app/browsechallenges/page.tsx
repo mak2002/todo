@@ -121,7 +121,7 @@ export default function Page() {
               ⬅️ Back
             </button>
             <button
-              className="btn btn-outline px-4 py-2 rounded-lg shadow-md"
+              className="btn btn-success px-4 py-2 rounded-lg shadow-md"
               onClick={handleStartChallenge}
             >
               Start Challenge
