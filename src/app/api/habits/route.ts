@@ -8,7 +8,7 @@ import {
 } from "../../services/habitsService";
 import { HabitModel } from "@/app/models/habit.model";
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function GET(req: Request, res: NextApiResponse) {
   try {
     const habits = await getHabitsdb();
     try {

@@ -8,13 +8,13 @@ import useHabits from "../hooks/useHooks";
 import html2canvas from "html2canvas-pro";
 import { TwitterShareButton } from "react-share";
 import {
+  Challenge,
   calculateCurrentStreak,
   calculateStreaks,
   getHabitChallenges,
   groupHabitsIntoChallenges,
 } from "../services/habitsService";
 import CompletedDatesChart from "../components/CompletedDatesChart";
-import { Challenge } from "../challenges/page";
 import { ActivityRings } from "@jonasdoesthings/react-activity-rings";
 import HabitImageDisplay from "../components/HabitImageDisplay";
 
@@ -159,6 +159,7 @@ export default function Progress({ fullScreen = true }: any) {
                     </div>
                     <div className="flex justify-between mt-4">
                       <button
+                      // @ts-ignore
                         onClick={() => handleScreenshot({ name, completed })}
                       >
                         Take Screenshot
@@ -174,6 +175,7 @@ export default function Progress({ fullScreen = true }: any) {
                               url={window.location.href} // Share current URL
                               title={`Check out my progress on ${name}`} // Custom message for Twitter
                               hashtags={["progress", "heatmap"]} // Hashtags for Twitter
+                      // @ts-ignore
                               imageUrl={screenshotData} // Image URL to share
                               className="share-button" // Optional class for styling
                             >

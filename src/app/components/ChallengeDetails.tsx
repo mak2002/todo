@@ -22,7 +22,7 @@ const ChallengeDetails: React.FC<ChallengeDetailsProps> = ({
     setSelectedHabitId(event.target.value);
   };
 
-  const selectedHabit = habits.find((habit) => habit._id === selectedHabitId);
+  const selectedHabit = habits.find((habit: any) => habit._id === selectedHabitId);
 
   useEffect(() => {
     
@@ -92,6 +92,7 @@ const ChallengeDetails: React.FC<ChallengeDetailsProps> = ({
                         </p>
                         <div
                           className="radial-progress bg-white text-black border-4 border-"
+                // @ts-ignore
                           style={{ "--value": percentage }}
                           role="progressbar"
                         >

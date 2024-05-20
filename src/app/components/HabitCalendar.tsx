@@ -74,14 +74,16 @@ const HabitCalendar: React.FC = () => {
       </div>
       <div className="grid grid-cols-2 gap-4">
         {habits.length > 0 ? (
-          habits.map((habit, index) => (
+          habits.map((habit, index): any => (
             <Button
               key={index}
               className={`w-40 h-40 p-10 flex flex-col items-center justify-center ${
+                // @ts-ignore
                 habit.completed.some((completedDate) => completedDate.date === selectedDate.toISOString().split("T")[0])
                   ? "bg-green-200 transition-colors duration-500"
                   : "bg-gray-200"
               }`}
+                // @ts-ignore
               onClick={() => completeHabitdb(habit._id, selectedDate.toISOString().split("T")[0])}
             >
               <p className="w-50 h-auto inline">{habit.emoji}</p>

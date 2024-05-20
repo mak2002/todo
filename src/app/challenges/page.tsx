@@ -238,6 +238,7 @@ const Challenges: React.FC = () => {
             <div key={index} className="w-40">
               <div
                 className="radial-progress"
+                // @ts-ignore
                 style={{ "--value": 70 }}
                 role="progressbar"
               >
@@ -315,6 +316,7 @@ console.log('completedChallenges', completedChallenges);
                 </h2>
                 <div
                   className={`radial-progress bg-white text-black border-4 border-slate-300 mx-auto mb-4`}
+                // @ts-ignore
                   style={{ "--value": `${challengeCompletion[challengeName]}` }}
                   role="progressbar"
                 >
@@ -370,6 +372,7 @@ console.log('completedChallenges', completedChallenges);
                     <div
                       className="radial-progress bg-white text-primary-content border-4 border-slate-300 mx-auto mb-4"
                       style={{
+                // @ts-ignore
                         "--value": `${challengeCompletion[challengeName]}`,
                       }}
                       role="progressbar"

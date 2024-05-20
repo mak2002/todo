@@ -4,7 +4,7 @@ import HabitList from "./HabitList";
 import { Habit } from "../db";
 import { createHabitdb } from "../services/habitsService";
 
-const HabitForm = ({setShowForm}: any) => {
+const HabitForm = ({ setShowForm }: any) => {
   const [challengeName, setChallengeName] = useState("");
   const [habitName, setHabitName] = useState("");
   const [frequency, setFrequency] = useState("");
@@ -31,7 +31,12 @@ const HabitForm = ({setShowForm}: any) => {
       alert("Please enter the number of challenge days");
       return;
     }
-    setCurrentChallenge({ name: challengeName, startDate, challengeDays, id: uuidv4() });
+    setCurrentChallenge({
+      name: challengeName,
+      startDate,
+      challengeDays,
+      id: uuidv4(),
+    });
     setChallengeName("");
     setStartDate("");
     setChallengeDays("");
@@ -120,7 +125,6 @@ const HabitForm = ({setShowForm}: any) => {
       // Create the challenge in the database
       // Iterate through the habits associated with the new challenge
       for (const habit of challengeData.habits) {
-
         // add start date to each habit
         habit.startDate = challengeData.startDate;
         habit.challengeDays = challengeData.challengeDays;
@@ -140,9 +144,17 @@ const HabitForm = ({setShowForm}: any) => {
     <div className="mt-8 w-full">
       {currentChallenge ? (
         <div>
-          <h2>Challenge: {currentChallenge.name}</h2>
-          <form onSubmit={handleSubmit} className="lg:w-1/2 xl:w-1/3 mx-auto">
-            <div className="space-y-2">
+          <h2 className="text-2xl font-bold mb-4">
+            Challenge: {currentChallenge.name}
+          </h2>
+          <HabitList
+            habits={habitsForChallenges.filter(
+              (habit) => habit.challengeId === currentChallenge.id
+            )}
+            onEdit={handleEdit}
+          />
+          <form onSubmit={handleSubmit} className="lg:w-1/2 xl:w-1/3 mx-auto mt-4">
+            <div className="space-y-4">
               <input
                 type="text"
                 value={habitName}
@@ -177,18 +189,18 @@ const HabitForm = ({setShowForm}: any) => {
               {editMode ? "Update Habit" : "Add Habit"}
             </button>
             <button
+              type="button"
               onClick={saveChallenge}
               className="btn btn-success mt-4 w-full"
             >
               Save Challenge
             </button>
           </form>
-          <HabitList habits={habitsForChallenges} onEdit={handleEdit} />
         </div>
       ) : (
         <form
           onSubmit={handleChallengeNameSubmit}
-          className="lg:w-1/2 xl:w-1/3 mx-auto gap-2 flx flex-col"
+          className="lg:w-1/2 xl:w-1/3 mx-auto space-y-4"
         >
           <input
             type="text"

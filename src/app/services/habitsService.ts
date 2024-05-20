@@ -119,7 +119,7 @@ interface StreakResult {
   streak: number;
 }
 
-export function calculateCurrentStreak(dates: string[]): number {
+export function calculateCurrentStreak(dates: string[] | undefined): number {
   if (!dates || dates.length === 0) {
     return 0; // If no dates provided, streak is 0
   }
