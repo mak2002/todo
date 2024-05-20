@@ -70,7 +70,7 @@ export default function Page() {
   const handleStartChallenge = async () => {
     if (selectedChallenge) {
       // Add logic to save the challenge start date and manage the challenge progression
-      alert(`Challenge "${selectedChallenge.name}" started on`);
+      alert(`Challenge "${selectedChallenge.name}" has started`);
       setSelectedChallenge(null);
       setStartDate("");
       await saveChallenge(selectedChallenge);

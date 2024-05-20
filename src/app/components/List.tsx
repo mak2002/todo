@@ -31,7 +31,16 @@ const Habits = ({
   const [inputType, setInputType] = useState<string>("text");
   const [inputValue, setInputValue] = useState<string | File>("");
 
-  const notify = () => toast("Habit completed 👍");
+  const notify = () => toast.success('Habit completed 👍', {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    });
 
   const handleHabitClick = async (habitId: string) => {
     const abcd = habitId === checkedHabitId ? null : habitId
@@ -148,7 +157,18 @@ const Habits = ({
 
   return (
     <div className="container mx-auto px-4 py-8 text-lg flex flex-col items-center justify-start min-h-screen">
-      <ToastContainer />
+      <ToastContainer
+position="top-right"
+autoClose={2000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="dark"
+/>
       {Object.keys(habits).map((challengeId) => {
         const remainingHabits = habits[challengeId]?.filter(
           (habit) =>
