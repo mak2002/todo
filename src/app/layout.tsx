@@ -1,8 +1,8 @@
-import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
+import PlausibleProvider from "next-plausible";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,9 +19,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className} data-theme="corporate">
-        <Navbar />
-        {children}
-        <Analytics />
+        <PlausibleProvider
+          trackLocalhost={true}
+          domain="challengesapp.vercel.app"
+        >
+          <Navbar />
+          {children}
+        </PlausibleProvider>
       </body>
     </html>
   );
