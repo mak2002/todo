@@ -8,6 +8,8 @@ import {
 import { Habit } from "../db";
 import "./List.css"; // Ensure this file is properly defined with necessary styles
 import Link from "next/link";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Habits = ({
   selectedDate,
@@ -29,6 +31,8 @@ const Habits = ({
   const [inputType, setInputType] = useState<string>("text");
   const [inputValue, setInputValue] = useState<string | File>("");
 
+  const notify = () => toast("Habit completed 👍");
+
   const handleHabitClick = async (habitId: string) => {
     const abcd = habitId === checkedHabitId ? null : habitId
     console.log('abcd:: ', habitId);
@@ -41,6 +45,7 @@ const Habits = ({
     }
     else {
       await completeHabit(habitId!, inputValue as string);
+      notify()
     }
   };
 
@@ -97,6 +102,7 @@ const Habits = ({
     e.preventDefault();
     if (inputType === "text") {
       await completeHabit(checkedHabitId!, inputValue as string);
+      notify()
     } else if (inputType === "image") {
       await handleFileChange(inputValue as File);
     }
@@ -142,6 +148,7 @@ const Habits = ({
 
   return (
     <div className="container mx-auto px-4 py-8 text-lg flex flex-col items-center justify-start min-h-screen">
+      <ToastContainer />
       {Object.keys(habits).map((challengeId) => {
         const remainingHabits = habits[challengeId]?.filter(
           (habit) =>
