@@ -1,38 +1,38 @@
 export const challengesData = [
     {
-        id: '1',
-        name: '30-Day Fitness Challenge 🏋️‍♂️',
-        challengeDays: 30,
-        habits: [
+        "id": "1",
+        "name": "14-Day Mindfulness Challenge 🧘‍♂️",
+        "challengeDays": 14,
+        "habits": [
             {
-                _id: '1',
-                name: 'Exercise for 30 Minutes 🏃‍♂️',
-                emoji: '🏃‍♂️',
-                challengeName: '30-Day Fitness Challenge 🏋️‍♂️',
-                challengeDays: 30,
-                tags: ['Exercise', 'Fitness'],
-                challengeId: '1'
+                "_id": "1",
+                "name": "Meditate for 10 Minutes 🧘",
+                "emoji": "🧘",
+                "challengeName": "14-Day Mindfulness Challenge 🧘‍♂️",
+                "challengeDays": 14,
+                "tags": ["Meditation", "Mindfulness"],
+                "challengeId": "2"
             },
             {
-                _id: '2',
-                name: 'Drink 2 Liters of Water 💧',
-                emoji: '💧',
-                challengeName: '30-Day Fitness Challenge 🏋️‍♂️',
-                challengeDays: 30,
-                tags: ['Health', 'Hydration'],
-                challengeId: '1'
+                "_id": "2",
+                "name": "Practice Deep Breathing 🌬️",
+                "emoji": "🌬️",
+                "challengeName": "14-Day Mindfulness Challenge 🧘‍♂️",
+                "challengeDays": 14,
+                "tags": ["Breathing", "Relaxation"],
+                "challengeId": "2"
             },
             {
-                _id: '3',
-                name: 'Stretch for 10 Minutes 🧘‍♀️',
-                emoji: '🧘‍♀️',
-                challengeName: '30-Day Fitness Challenge 🏋️‍♂️',
-                challengeDays: 30,
-                tags: ['Exercise', 'Stretching'],
-                challengeId: '1'
+                "_id": "3",
+                "name": "Write in a Gratitude Journal ✍️",
+                "emoji": "✍️",
+                "challengeName": "14-Day Mindfulness Challenge 🧘‍♂️",
+                "challengeDays": 14,
+                "tags": ["Gratitude", "Journal"],
+                "challengeId": "2"
             }
         ]
-    },
+    },    
     {
         id: '5',
         name: '10-Day Reading Challenge 📚',
